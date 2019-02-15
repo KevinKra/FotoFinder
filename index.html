@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>FotoFinder</title>
+</head>
+<body>
+	<header>
+		<nav class="top-nav">
+			<article class="header-title">
+				<h1>FOTO</h1>
+				<span>Camera</span>
+				<h1>FINDER</h1>
+			</article>
+			<form action="">
+				<input type="text" placeholder="Search">
+				<button type="submit" name="btn-search"></button>
+			</form>
+		</nav>
+		<form action="" class="input-form">
+			<label for="title-input">Title</label>
+			<input type="text" name="title-input">
+			<label for="caption-input">Caption</label>
+			<input type="text" name="caption-input">
+			<button type="submit" value="Choose-File" class="btn btn-lg">Choose File</button>
+			<button type="submit" value="View-1-Favorites" class="btn btn-sm">View 1 Favorites</button>
+			<button type="submit" value="Add-to-Album" class="btn btn-sm">Add to Album</button>
+		</form>
+	</header>
+	<main>
+		<article class="card">
+			<h2 class="card-title">Waterfall Image</h2>
+			<img src="" alt="" class="card-image">
+			<p class="card-paragraph">Lorem Ipsum</p>
+			<footer class="card-footer">
+				<div class="card-trash">trash</div>
+				<div class="card-favorite">like</div>
+			</footer>
+		</article>
+	</main>
+
+
+	<!-- header>nav.top-nav>(article.header-title>(h1{FOTO}+span{Camera}+h1{FINDER})^form>(input[type="text" placeholder="Search"]+button[type="submit" name="btn-search"]))^(form.input-form>label[for="title-input"]{Title}+input[type="text" name="title-input"]+label[for="caption-input"]{Caption}+input[type="text" name="caption-input"]+button[type="submit" value="Choose-File"].btn.btn-lg{Choose File}+button[type="submit" value="View-1-Favorites"].btn.btn-sm{View 1 Favorites}+button[type="submit" value="Add-to-Album"].btn.btn-sm{Add to Album})^main>article.card>(h2.card-title{Waterfall Image}+img.card-image+p.card-paragraph{Lorem Ipsum}+footer.card-footer>(div.card-trash{trash}+div.card-favorite{like})) -->
+</body>
+</html>
