@@ -1,5 +1,5 @@
-$priBgColor: #3E2A35;
-$secBgColor: #C2B2B4;
+$primaryColor: #3E2A35;
+$secondaryColor: #C2B2B4;
 $btnColor: #5B4447;
 $btnColor2: #222;
 $btnHover: #C2B2B4;;
@@ -16,14 +16,14 @@ body {
 }
 
 @mixin input-1 {
-	border: 0;
 	padding: .3rem;
 	width: 250px;
+	border: 2px solid $secondaryColor;
+	outline: 0;
 }
 
 @mixin input-2 {
-	border: 0;
-	padding: .5rem;
+
 }
 
 @mixin font-size($n) {
@@ -36,6 +36,7 @@ body {
 	color: $btnActive;
 	font-size: $font16; 
 	padding: 1rem;
+	outline: 0;
 	&.btn-lg {
 		width: 100%;
 	}
@@ -58,7 +59,7 @@ body {
 }
 
 .main-header {
-	background-color: $priBgColor;
+	background-color: $primaryColor;
 	.top-nav {
 		align-items: center;
 		border: 1px solid red;
@@ -73,7 +74,27 @@ body {
 			}
 		}
 		.header-search {
-			input {@include input-1};
+			input {
+				@include input-1;
+				float: left;
+				border-right: none;
+				border-radius: 5px 0 0 5px;
+			};
+			[name=btn-search] {
+				float: right;
+				margin: 0;
+				border: 2px solid $secondaryColor;
+				background-color: $secondaryColor;
+				border-radius: 0 5px 5px 0;
+				padding: 5px;
+				color: #fff;
+				outline: 0;
+				border-left: none;
+				&:hover {
+					color: $btnColor2;
+					cursor: pointer;
+				}
+			}
 		}
 	}
 }
