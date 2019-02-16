@@ -1,0 +1,48 @@
+$priBgColor: #3E2A35;
+$secBgColor: #C2B2B4;
+$btnColor: #5B4447;
+$btnColor2: #222;
+$btnHover: #C2B2B4;;
+$btnActive: #eee;
+$font16: 16px;
+
+*:before, *:after, * {
+	box-sizing: border-box;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+@mixin default-btn {
+	background-color: $btnColor;
+	border: none;
+	padding: 1rem;
+	color: $btnActive;
+	font-size: $font16; 
+	&.btn-lg {
+		width: 100%;
+	}
+	&.btn-sm {
+		width: 40%;
+	}
+	&:hover {
+		color: $btnColor2;
+		background-color: $btnHover; 
+	}
+	&:focus {
+		outline: 0;
+		background-color: $btnActive;
+	}
+}
+
+.main-header {
+	background-color: $priBgColor;
+	.top-nav {
+		background-color: $secBgColor;
+	}
+}
+
+.btn {@include default-btn};
+
