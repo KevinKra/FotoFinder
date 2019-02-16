@@ -15,12 +15,27 @@ body {
 	margin: 0;
 }
 
+@mixin input-1 {
+	border: 0;
+	padding: .3rem;
+	width: 250px;
+}
+
+@mixin input-2 {
+	border: 0;
+	padding: .5rem;
+}
+
+@mixin font-size($n) {
+	font-size: $n * 1rem;
+}
+
 @mixin default-btn {
 	background-color: $btnColor;
 	border: none;
-	padding: 1rem;
 	color: $btnActive;
 	font-size: $font16; 
+	padding: 1rem;
 	&.btn-lg {
 		width: 100%;
 	}
@@ -28,19 +43,38 @@ body {
 		width: 40%;
 	}
 	&:hover {
-		color: $btnColor2;
 		background-color: $btnHover; 
+		color: $btnColor2;
+		cursor: pointer;
 	}
 	&:focus {
-		outline: 0;
 		background-color: $btnActive;
+		outline: 0;
 	}
+}
+
+.main-content {
+	@include font-size(1);
 }
 
 .main-header {
 	background-color: $priBgColor;
 	.top-nav {
-		background-color: $secBgColor;
+		align-items: center;
+		border: 1px solid red;
+		display: flex;
+		justify-content: space-between;
+		padding: .5rem;
+		.header-title {
+			align-items: center;
+			display: flex;
+			h1 {
+				margin: 0;
+			}
+		}
+		.header-search {
+			input {@include input-1};
+		}
 	}
 }
 
