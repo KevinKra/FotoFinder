@@ -1,0 +1,90 @@
+*:before, *:after, * {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.main-content {
+  font-size: 1rem;
+}
+
+.main-header {
+  background-color: #3E2A35;
+}
+.main-header .top-nav {
+  align-items: center;
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+  padding: .5rem 2rem;
+}
+.main-header .top-nav .header-title {
+  align-items: center;
+  display: flex;
+}
+.main-header .top-nav .header-title h1 {
+  color: #fff;
+  font-size: 36px;
+  letter-spacing: 3px;
+  margin: 0;
+}
+.main-header .top-nav .header-title img {
+  height: 50px;
+  margin: 0 .5rem;
+  width: 50px;
+}
+.main-header .top-nav .header-search input {
+  padding: .3rem;
+  width: 250px;
+  border: 2px solid #C2B2B4;
+  outline: 0;
+  border-radius: 5px 0 0 5px;
+  border-right: none;
+  float: left;
+}
+.main-header .top-nav .header-search [name=btn-search] {
+  background-color: #C2B2B4;
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+  border: 2px solid #C2B2B4;
+  color: #fff;
+  float: right;
+  font-size: 18px;
+  margin: 0;
+  outline: 0;
+  padding: 4px 3px 4px 3px;
+}
+.main-header .top-nav .header-search [name=btn-search]:hover {
+  color: #222;
+  cursor: pointer;
+}
+
+.btn {
+  background-color: #5B4447;
+  border: none;
+  color: #eee;
+  font-size: 16px;
+  outline: 0;
+  padding: 1rem;
+}
+.btn.btn-lg {
+  width: 100%;
+}
+.btn.btn-sm {
+  width: 40%;
+}
+.btn:hover {
+  background-color: #C2B2B4;
+  color: #222;
+  cursor: pointer;
+}
+.btn:focus {
+  background-color: #eee;
+  outline: 0;
+}
+
+/*# sourceMappingURL=styles.css.map */

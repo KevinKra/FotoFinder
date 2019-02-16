@@ -11,8 +11,9 @@ $font16: 16px;
 }
 
 body {
-	padding: 0;
+	font-family: 'Open Sans', sans-serif;
 	margin: 0;
+	padding: 0;
 }
 
 @mixin input-1 {
@@ -35,8 +36,8 @@ body {
 	border: none;
 	color: $btnActive;
 	font-size: $font16; 
-	padding: 1rem;
 	outline: 0;
+	padding: 1rem;
 	&.btn-lg {
 		width: 100%;
 	}
@@ -65,31 +66,40 @@ body {
 		border: 1px solid red;
 		display: flex;
 		justify-content: space-between;
-		padding: .5rem;
+		padding: .5rem 2rem;
 		.header-title {
 			align-items: center;
 			display: flex;
 			h1 {
+				color: #fff;
+				font-size: 36px;
+				letter-spacing: 3px;
 				margin: 0;
+			}
+			img {
+				height: 50px;
+				margin: 0 .5rem;
+				width: 50px;
 			}
 		}
 		.header-search {
 			input {
 				@include input-1;
-				float: left;
-				border-right: none;
 				border-radius: 5px 0 0 5px;
+				border-right: none;
+				float: left;
 			};
 			[name=btn-search] {
-				float: right;
-				margin: 0;
-				border: 2px solid $secondaryColor;
 				background-color: $secondaryColor;
-				border-radius: 0 5px 5px 0;
-				padding: 5px;
-				color: #fff;
-				outline: 0;
 				border-left: none;
+				border-radius: 0 5px 5px 0;
+				border: 2px solid $secondaryColor;
+				color: #fff;
+				float: right;
+				font-size: 18px;
+				margin: 0;
+				outline: 0;
+				padding: 4px 3px 4px 3px;
 				&:hover {
 					color: $btnColor2;
 					cursor: pointer;

@@ -3,18 +3,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>FotoFinder</title>
+	<link rel="stylesheet" type="text/css" href="sass/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="normalize.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
 </head>
 <body>
-	<header>
+	<header class="main-header">
 		<nav class="top-nav">
 			<article class="header-title">
 				<h1>FOTO</h1>
-				<span>Camera</span>
+				<img src="icons/foto-finder-logo.svg" alt="Photo finder logo">
 				<h1>FINDER</h1>
 			</article>
-			<form action="">
+			<form action="" class="header-search">
 				<input type="text" placeholder="Search">
-				<button type="submit" name="btn-search"></button>
+				<button type="submit" name="btn-search"><i class="fas fa-search"></i></button>
 			</form>
 		</nav>
 		<form action="" class="input-form">
@@ -27,7 +31,7 @@
 			<button type="submit" value="Add-to-Album" class="btn btn-sm">Add to Album</button>
 		</form>
 	</header>
-	<main>
+	<main class="main-content">
 		<article class="card">
 			<h2 class="card-title">Waterfall Image</h2>
 			<img src="" alt="" class="card-image">
