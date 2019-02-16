@@ -1,0 +1,113 @@
+$primaryColor: #3E2A35;
+$secondaryColor: #C2B2B4;
+$btnColor: #5B4447;
+$btnColor2: #222;
+$btnHover: #C2B2B4;;
+$btnActive: #eee;
+$font16: 16px;
+
+*:before, *:after, * {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+@mixin input-1 {
+	padding: .3rem;
+	width: 250px;
+	border: 2px solid $secondaryColor;
+	outline: 0;
+}
+
+@mixin input-2 {
+
+}
+
+@mixin font-size($n) {
+	font-size: $n * 1rem;
+}
+
+@mixin default-btn {
+	background-color: $btnColor;
+	border: none;
+	color: $btnActive;
+	font-size: $font16; 
+	outline: 0;
+	padding: 1rem;
+	&.btn-lg {
+		width: 100%;
+	}
+	&.btn-sm {
+		width: 40%;
+	}
+	&:hover {
+		background-color: $btnHover; 
+		color: $btnColor2;
+		cursor: pointer;
+	}
+	&:focus {
+		background-color: $btnActive;
+		outline: 0;
+	}
+}
+
+.main-content {
+	@include font-size(1);
+}
+
+.main-header {
+	background-color: $primaryColor;
+	.top-nav {
+		align-items: center;
+		border: 1px solid red;
+		display: flex;
+		justify-content: space-between;
+		padding: .5rem 2rem;
+		.header-title {
+			align-items: center;
+			display: flex;
+			h1 {
+				color: #fff;
+				font-size: 36px;
+				letter-spacing: 3px;
+				margin: 0;
+			}
+			img {
+				height: 50px;
+				margin: 0 .5rem;
+				width: 50px;
+			}
+		}
+		.header-search {
+			input {
+				@include input-1;
+				border-radius: 5px 0 0 5px;
+				border-right: none;
+				float: left;
+			};
+			[name=btn-search] {
+				background-color: $secondaryColor;
+				border-left: none;
+				border-radius: 0 5px 5px 0;
+				border: 2px solid $secondaryColor;
+				color: #fff;
+				float: right;
+				font-size: 18px;
+				margin: 0;
+				outline: 0;
+				padding: 4px 3px 4px 3px;
+				&:hover {
+					color: $btnColor2;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}
+
+.btn {@include default-btn};
+
