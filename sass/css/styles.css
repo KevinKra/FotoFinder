@@ -16,7 +16,6 @@ body {
   background-color: #5B4447;
   border: none;
   color: #eee;
-  font-size: 16px;
   outline: 0;
   padding: 1rem;
 }
@@ -88,14 +87,14 @@ body {
   cursor: pointer;
 }
 .main-header .input-form {
+  display: flex;
+  flex-direction: column;
   width: 50%;
   max-width: 700px;
   min-width: 400px;
   margin: 0 auto;
   height: 375px;
-  display: flex;
   justify-content: space-around;
-  flex-direction: column;
 }
 .main-header .input-form .input-div {
   display: flex;
