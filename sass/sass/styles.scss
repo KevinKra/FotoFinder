@@ -8,6 +8,9 @@ $btnActive: #eee;
 
 @mixin input {
 	outline: 0;
+	box-shadow: 0 0 5px;
+	&:hover, &:focus {
+	}
 }
 
 @mixin input-1 {
@@ -45,6 +48,7 @@ $btnActive: #eee;
 	background-color: $btnColor;
 	border: none;
 	color: $btnActive;
+	transition: .07s ease-in-out;
 	outline: 0;
 	padding: 1rem;
 	&.btn-lg {
@@ -59,9 +63,9 @@ $btnActive: #eee;
 		color: $btnColor2;
 		cursor: pointer;
 	}
-	&:focus {
+	&:active {
 		background-color: $btnActive;
-		outline: 0;
+		color: #222;
 	}
 }
 
@@ -70,7 +74,6 @@ $btnActive: #eee;
 }
 
 body {
-	// @include flex-column;
 	height: 100vh;
 	font-family: 'Open Sans', sans-serif;
 	margin: 0;
