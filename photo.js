@@ -5,8 +5,8 @@ class Photo {
 		// this.file = readAsDataURL(file);
 		this.favorite = false;
 	}
-	saveToStorage() {
-		localStorage.setItem("image", JSON.stringify(this));
+	saveToStorage(photos) {
+		localStorage.setItem("image", JSON.stringify(photos));
 	}
 	deleteFromStorage() {
 		//Should remove from localStorage;
