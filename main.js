@@ -13,10 +13,19 @@ addToAlbum.addEventListener("click", collectUserInputs);
 
 
 function collectUserInputs(e) {
+//flag if ternary true, run function.
+	const validFlag = false;
 	e.preventDefault();
 	checkInputs();
+
+	if (validFlag) {
+	const currentTitle = titleInput.value;
+	const currentCaption = captionInput.value;
+	console.log("current Title: " + currentTitle);
+	console.log("current Caption: " + currentCaption);
+	}
 	function checkInputs() {
-		if (!titleInput.value || !captionInput.value) alert('Please enter all fields');
+		return (!titleInput.value || !captionInput.value)? alert('Please enter all fields') : validFlag = true;
 	}
 }
 
