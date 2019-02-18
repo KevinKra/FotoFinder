@@ -22,6 +22,7 @@ body {
 }
 .btn.btn-lg {
   width: 100%;
+  text-align: center;
 }
 .btn.btn-sm {
   width: 40%;
@@ -105,6 +106,14 @@ body {
 .main-header .input-form .input-div label {
   color: #C2B2B4;
   padding: .6rem 0;
+}
+.main-header .input-form .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 .main-header .input-form .btn-input-container {
   display: flex;
