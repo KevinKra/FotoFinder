@@ -2,11 +2,11 @@ class Photo {
 	constructor(title, caption, file) {
 		this.title = title;
 		this.caption = caption;
-		this.file = readAsDataURL(file);
+		// this.file = readAsDataURL(file);
 		this.favorite = false;
 	}
 	saveToStorage() {
-		//Should save to storage for data persistence between reloads;
+		localStorage.setItem("image", JSON.stringify(this));
 	}
 	deleteFromStorage() {
 		//Should remove from localStorage;
