@@ -33,25 +33,25 @@ function collectUserInputs(e) {
 
 	totalPhotos.push(newPhoto);
 	newPhoto.saveToStorage(totalPhotos);
-	appendCard();
+	newPhoto.appendCard();
 	function checkInputs() {
 		return (!titleInput.value || !captionInput.value || !fileInput.value)? alert('Please enter all fields') : validFlag = true;
 	}
 }
 
-function appendCard() {
-	cardOutputArea.innerHTML += `
-			<article class="card">
-			<section>
-				<h2 class="card-title">Waterfall Image</h2>
-				<img src="" alt="" class="card-image">
-				<p class="card-paragraph">Lorem Ipsum  dolor sit amet, consectetuer something elit</p>
-			</section>
-			<footer class="card-footer">
-				<button class="btn-trash"><img class="card-trash" src="icons/delete.svg"></button>
-				<button class="btn-like"><img class="card-favorite" src="icons/favorite.svg"></button>
-			</footer>
-		</article>`
-}
+// function appendCard(source) {
+// 	cardOutputArea.innerHTML += `
+// 			<article class="card">
+// 			<section>
+// 				<h2 class="card-title">${this.title}</h2>
+// 				<img src="" alt="" class="card-image">
+// 				<p class="card-paragraph">${this.caption}</p>
+// 			</section>
+// 			<footer class="card-footer">
+// 				<button class="btn-trash"><img class="card-trash" src="icons/delete.svg"></button>
+// 				<button class="btn-like"><img class="card-favorite" src="icons/favorite.svg"></button>
+// 			</footer>
+// 		</article>`
+// }
 //button should check that title, caption, and file, are all populated.
 //once all categories are entered, append card to card section.
