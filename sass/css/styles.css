@@ -17,11 +17,13 @@ body {
   background-color: #5B4447;
   border: none;
   color: #eee;
+  transition: .07s ease-in-out;
   outline: 0;
   padding: 1rem;
 }
 .btn.btn-lg {
   width: 100%;
+  text-align: center;
 }
 .btn.btn-sm {
   width: 40%;
@@ -31,9 +33,9 @@ body {
   color: #222;
   cursor: pointer;
 }
-.btn:focus {
+.btn:active {
   background-color: #eee;
-  outline: 0;
+  color: #222;
 }
 
 .main-header {
@@ -64,6 +66,7 @@ body {
 }
 .main-header .top-nav .header-search input {
   outline: 0;
+  box-shadow: 0 0 5px;
   padding: .3rem;
   width: 250px;
   border: 2px solid #C2B2B4;
@@ -106,12 +109,21 @@ body {
   color: #C2B2B4;
   padding: .6rem 0;
 }
+.main-header .input-form .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
 .main-header .input-form .btn-input-container {
   display: flex;
   justify-content: space-between;
 }
 .main-header .input-form input {
   outline: 0;
+  box-shadow: 0 0 5px;
   padding: .7rem;
 }
 

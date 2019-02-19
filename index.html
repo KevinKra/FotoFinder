@@ -32,10 +32,11 @@
 					<input type="text" name="caption-input">
 				</div>
 			</section>
-			<button type="submit" value="Choose-File" class="btn btn-lg">Choose File</button>
+				<input type="file" name="file" id="file" class="inputfile" />
+				<label for="file" class="btn btn-lg">Choose a file</label>
 			<section class="btn-input-container">
-				<button type="submit" value="View-1-Favorites" class="btn btn-sm">View 1 Favorites</button>
-				<button type="submit" value="Add-to-Album" class="btn btn-sm">Add to Album</button>
+				<button type="submit" id="view-favorites" value="View-1-Favorites" class="btn btn-sm">View 1 Favorites</button>
+				<button type="submit" id="add-to-album" value="Add-to-Album" class="btn btn-sm">Add to Album</button>
 			</section>
 		</form>
 	</header>
@@ -52,5 +53,7 @@
 			</footer>
 		</article>							
 	</main>
+	<script type="text/javascript" src="photo.js"></script>
+	<script type="text/javascript" src="main.js"></script>
 </body>
 </html>
