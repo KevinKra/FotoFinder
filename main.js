@@ -7,10 +7,10 @@ const addToAlbum = document.querySelector("#add-to-album");
 const form = document.querySelector('.input-form');
 const titleInput = document.querySelector(`[name=title-input]`);
 const captionInput = document.querySelector(`[name=caption-input]`);
-
+const fileInput = document.querySelector(`[name=file]`);
 
 const totalPhotos = [];
-console.log(totalPhotos);
+
 addToAlbum.addEventListener("click", collectUserInputs);
 
 function collectUserInputs(e) {
@@ -22,11 +22,13 @@ function collectUserInputs(e) {
 
 	const currentTitle = titleInput.value;
 	const currentCaption = captionInput.value;
-	const nowPhoto = new Photo(currentTitle, currentCaption);
-	totalPhotos.push(nowPhoto);
-	nowPhoto.saveToStorage(totalPhotos);
+	const currentFile = fileInput.value;
+	console.log(fileInput.value);
+	const newPhoto = new Photo(currentTitle, currentCaption, currentFile);
+	totalPhotos.push(newPhoto);
+	newPhoto.saveToStorage(totalPhotos);
 	function checkInputs() {
-		return (!titleInput.value || !captionInput.value)? alert('Please enter all fields') : validFlag = true;
+		return (!titleInput.value || !captionInput.value || !fileInput.value)? alert('Please enter all fields') : validFlag = true;
 	}
 }
 //button should check that title, caption, and file, are all populated.

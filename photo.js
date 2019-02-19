@@ -2,7 +2,7 @@ class Photo {
 	constructor(title, caption, file) {
 		this.title = title;
 		this.caption = caption;
-		// this.file = readAsDataURL(file);
+		this.file = file; //readAsDataURL()
 		this.favorite = false;
 	}
 	saveToStorage(photos) {
