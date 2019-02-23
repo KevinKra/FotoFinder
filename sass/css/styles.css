@@ -133,6 +133,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   padding: 0 3rem;
+  min-height: 50vh;
 }
 .main-content .card {
   display: flex;
@@ -140,6 +141,7 @@ body {
   border: 2px solid #938284;
   margin: 1rem;
   width: 200px;
+  height: 100%;
 }
 .main-content .card section {
   display: flex;
