@@ -193,6 +193,7 @@ body {
 			.card-paragraph {
 				@include card-text;
 				margin: 0;
+				min-height: 80px
 			}
 		}
 		.card-footer {
