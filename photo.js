@@ -6,7 +6,7 @@ class Photo {
 		this.favorite = false;
 	}
 	saveToStorage(photos) {
-		localStorage.setItem("image", JSON.stringify(photos));
+		localStorage.setItem("photos", JSON.stringify(photos));
 	}
 	deleteFromStorage() {
 		//Should remove from localStorage;
