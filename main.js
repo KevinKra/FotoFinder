@@ -13,6 +13,9 @@ const fileInput = document.querySelector(`[name=file]`);
 const cardOutputArea = document.querySelector(`.main-content`);
 
 //card
+const trashCard = document.querySelector(".card-trash");
+const favoriteCard = document.querySelector(".card-favorite");
+
 const totalPhotos = JSON.parse(localStorage.getItem('photos')) || [];
 let reader = new FileReader();
 
