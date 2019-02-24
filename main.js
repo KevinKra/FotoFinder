@@ -13,11 +13,30 @@ const fileInput = document.querySelector(`[name=file]`);
 const cardOutputArea = document.querySelector(`.main-content`);
 
 //card
-const card = document.querySelector('.card');
+const totalPhotos = JSON.parse(localStorage.getItem('photos')) || [];
 
-const totalPhotos = [];
+persistDOM();
 
 addToAlbum.addEventListener("click", collectUserInputs);
+
+
+
+
+function persistDOM() {
+	restoreObjectMethods();
+	restoredPhotos.forEach( function(photo) {
+		photo.appendCard();
+	})
+}
+
+function restoreObjectMethods() {
+	restoredPhotos = [];
+	totalPhotos.forEach( function(photo) {
+		photo = new Photo(photo.title, photo.caption, photo.file);
+		restoredPhotos.push(photo);
+	})
+	return restoredPhotos;
+}
 
 function collectUserInputs(e) {
 //flag if ternary true, run function.
@@ -38,20 +57,3 @@ function collectUserInputs(e) {
 		return (!titleInput.value || !captionInput.value || !fileInput.value)? alert('Please enter all fields') : validFlag = true;
 	}
 }
-
-// function appendCard(source) {
-// 	cardOutputArea.innerHTML += `
-// 			<article class="card">
-// 			<section>
-// 				<h2 class="card-title">${this.title}</h2>
-// 				<img src="" alt="" class="card-image">
-// 				<p class="card-paragraph">${this.caption}</p>
-// 			</section>
-// 			<footer class="card-footer">
-// 				<button class="btn-trash"><img class="card-trash" src="icons/delete.svg"></button>
-// 				<button class="btn-like"><img class="card-favorite" src="icons/favorite.svg"></button>
-// 			</footer>
-// 		</article>`
-// }
-//button should check that title, caption, and file, are all populated.
-//once all categories are entered, append card to card section.
