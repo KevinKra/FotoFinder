@@ -13,8 +13,15 @@ const fileInput = document.querySelector(`[name=file]`);
 const cardOutputArea = document.querySelector(`.main-content`);
 
 //card
-const trashCard = document.querySelector(".card-trash");
-const favoriteCard = document.querySelector(".card-favorite");
+const trashBtn = document.querySelector(".card-trash");
+const favoriteBtn = document.querySelector(".card-favorite");
+
+
+function removeCard(e) {
+	console.log(e.target.className === `card-trash`);
+}
+
+
 
 const totalPhotos = JSON.parse(localStorage.getItem('photos')) || [];
 let reader = new FileReader();
@@ -22,7 +29,7 @@ let reader = new FileReader();
 
 
 persistDOM();
-
+cardOutputArea.addEventListener("click", removeCard)
 addToAlbum.addEventListener("click", loadImage);
 
 
