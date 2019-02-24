@@ -14,13 +14,22 @@ const cardOutputArea = document.querySelector(`.main-content`);
 
 //card
 const totalPhotos = JSON.parse(localStorage.getItem('photos')) || [];
+let reader = new FileReader();
+
+
 
 persistDOM();
 
-addToAlbum.addEventListener("click", collectUserInputs);
+addToAlbum.addEventListener("click", loadImage);
 
 
-
+function loadImage() {
+	console.log('test');
+	if (fileInput.files[0]) {
+		reader.readAsDataURL(fileInput.files[0]);
+		reader.onload = collectUserInputs;
+	}
+}
 
 function persistDOM() {
 	restoreObjectMethods();
@@ -32,13 +41,15 @@ function persistDOM() {
 function restoreObjectMethods() {
 	restoredPhotos = [];
 	totalPhotos.forEach( function(photo) {
-		photo = new Photo(photo.title, photo.caption, photo.file);
+		photo = new Photo(photo.title, photo.caption, photo.file, photo.id);
 		restoredPhotos.push(photo);
 	})
 	return restoredPhotos;
 }
 
+
 function collectUserInputs(e) {
+	console.log('test2');
 //flag if ternary true, run function.
 	let validFlag = false;
 	e.preventDefault();
@@ -47,13 +58,14 @@ function collectUserInputs(e) {
 
 	const currentTitle = titleInput.value;
 	const currentCaption = captionInput.value;
-	const currentFile = fileInput.value;
-	const newPhoto = new Photo(currentTitle, currentCaption, currentFile);
+	const currentFile = e.target.result;
+	const newPhoto = new Photo(currentTitle, currentCaption, currentFile, Date.now());
 
 	totalPhotos.push(newPhoto);
 	newPhoto.saveToStorage(totalPhotos);
 	newPhoto.appendCard();
+
 	function checkInputs() {
 		return (!titleInput.value || !captionInput.value || !fileInput.value)? alert('Please enter all fields') : validFlag = true;
-	}
+	};
 }
