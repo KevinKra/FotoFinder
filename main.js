@@ -21,6 +21,7 @@ const reader = new FileReader();
 
 
 restoreObjectMethods(totalPhotos);
+updateCounter();
 
 cardOutputArea.addEventListener("click", likeCard)
 cardOutputArea.addEventListener("click", removeCard);
@@ -28,20 +29,20 @@ addToAlbum.addEventListener("click", loadImage);
 
 function removeCard(e) {
 	if (e.target.className !== 'card-trash') return;
-	let photoRemove = findCard(e);
+	const photoRemove = findCard(e);
 	e.target.closest(".card").remove();
 	photoRemove.deleteFromStorage();
 }
 
 function likeCard(e) {
 	if (e.target.className !== "card-favorite") return;
-	let photoFavorite = findCard(e);
+	const photoFavorite = findCard(e);
 	photoFavorite.updatePhoto();
 	updateCounter();
 }
 
 function findCard(e) {
-	let cardID = Number(e.target.closest(".card").getAttribute("data-id"));
+	const cardID = Number(e.target.closest(".card").getAttribute("data-id"));
 	return totalPhotos.find( (photo) => {
 		return photo.id === cardID;
 	})
@@ -49,10 +50,7 @@ function findCard(e) {
 
 
 function updateCounter() {
-	//check the .favorite property of every card and update the counter
-	//target the appropriate element in html
-	//cycle through localStorage and update button with total of true conditions
-	let parsedPhotos = JSON.parse(localStorage.getItem("photos"));
+	const parsedPhotos = JSON.parse(localStorage.getItem("photos")) || [];
 	let favorites = 0;
 	parsedPhotos.forEach( function(photo) {
 		if (photo.favorite) {
@@ -61,6 +59,8 @@ function updateCounter() {
 	})
 	if (favorites !== 0) {
 		viewFavorites.innerText = `View ${favorites} Favorites`;
+	} else {
+		viewFavorites.innerText = `View 0 Favorites`;
 	}
 	console.log(favorites)
 }
