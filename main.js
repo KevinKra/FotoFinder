@@ -16,21 +16,27 @@ const cardOutputArea = document.querySelector(`.main-content`);
 const trashBtn = document.querySelector(".card-trash");
 const favoriteBtn = document.querySelector(".card-favorite");
 
-
-function removeCard(e) {
-	console.log(e.target.className === `card-trash`);
-}
-
-
-
 const totalPhotos = JSON.parse(localStorage.getItem('photos')) || [];
 let reader = new FileReader();
 
 
 
 persistDOM();
-cardOutputArea.addEventListener("click", removeCard)
+cardOutputArea.addEventListener("click", findCard);
 addToAlbum.addEventListener("click", loadImage);
+
+
+function removeCard(e) {
+
+}
+
+function findCard(e) {
+	let cardID = e.target.closest(".card").getAttribute("data-id");
+	return totalPhotos.find( (photo) => {
+		return photo.index === cardID;
+	})
+}
+
 
 
 function loadImage() {
