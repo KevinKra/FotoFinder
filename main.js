@@ -23,8 +23,9 @@ const reader = new FileReader();
 restoreObjectMethods(totalPhotos);
 updateCounter();
 
-cardOutputArea.addEventListener("click", likeCard)
+cardOutputArea.addEventListener("click", likeCard);
 cardOutputArea.addEventListener("click", removeCard);
+cardOutputArea.addEventListener("click", clickHandler);
 addToAlbum.addEventListener("click", loadImage);
 
 function removeCard(e) {
@@ -49,12 +50,21 @@ function findCard(e) {
 }
 
 
+console.log("favorite button: " + favoriteBtn);
+
+
+//BUG: on reload, if 1 card is clicked, all other card statuses change to false
+//could be event delegation/bubbling issue
+
+//its not that it onloads
+//preventDefault on all related did nothing
 function updateCounter() {
 	const parsedPhotos = JSON.parse(localStorage.getItem("photos")) || [];
 	let favorites = 0;
 	parsedPhotos.forEach( function(photo) {
 		if (photo.favorite) {
 			favorites++;
+			// favoriteBtn.src = "icons/favorite-active.svg"
 		}
 	})
 	if (favorites !== 0) {
@@ -64,6 +74,26 @@ function updateCounter() {
 	}
 	console.log(favorites)
 }
+
+
+//probably delete
+function persistFavorite() {
+	const parsedPhotos = JSON.parse(localStorage.getItem("photos")) || [];
+	parsedPhotos.forEach( photo => {
+		if (photo.favorite) {
+			favoriteBtn.src = "icons/favorite-active.svg"
+		}
+	})
+}
+
+function clickHandler(e) {
+	// console.log("current event: " + e.target.className)
+	if (e.target.className == "card-favorite") {
+		console.log('matches card-favorite')
+	} 
+}
+
+
 
 function restoreObjectMethods(parsedCards) {
 	totalPhotos = [];
