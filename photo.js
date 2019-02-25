@@ -2,7 +2,7 @@ class Photo {
 	constructor(title, caption, file, id) {
 		this.title = title;
 		this.caption = caption;
-		this.file = file; //readAsDataURL()
+		this.file = file;
 		this.favorite = false;
 		this.id = id;
 	}
@@ -10,7 +10,6 @@ class Photo {
 		localStorage.setItem("photos", JSON.stringify(photos));
 	}
 	deleteFromStorage() {
-		console.log("Am i being targeted?")
 		const target = totalPhotos.indexOf(this);
 		totalPhotos.splice(target, 1);
 		const stringifyPhotos = JSON.stringify(totalPhotos);
@@ -20,7 +19,6 @@ class Photo {
 		const index = totalPhotos.indexOf(this);
 		const target = totalPhotos[index]
 		target.favorite = true;
-		console.log("Current target = " + target.favorite)
 		const stringifyPhotos = JSON.stringify(totalPhotos);
 		localStorage.setItem("photos", stringifyPhotos)
 	}
