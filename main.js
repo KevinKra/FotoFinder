@@ -22,7 +22,7 @@ const reader = new FileReader();
 
 restoreObjectMethods(totalPhotos);
 
-
+cardOutputArea.addEventListener("click", likeCard)
 cardOutputArea.addEventListener("click", removeCard);
 addToAlbum.addEventListener("click", loadImage);
 
@@ -31,6 +31,15 @@ function removeCard(e) {
 	let photoRemove = findCard(e);
 	e.target.closest(".card").remove();
 	photoRemove.deleteFromStorage();
+}
+
+function likeCard(e) {
+	if (e.target.className !== "card-favorite") return;
+	let photoFavorite = findCard(e);
+	console.log(photoFavorite.favorite);
+	// photoFavorite.favorite = true;
+	console.log(photoFavorite.favorite);
+	photoFavorite.updatePhoto();
 }
 
 function findCard(e) {

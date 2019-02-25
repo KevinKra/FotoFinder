@@ -17,6 +17,11 @@ class Photo {
 		localStorage.setItem("photos", stringifyPhotos);
 	}
 	updatePhoto() {
-		//Should update document photo;
+		const index = totalPhotos.indexOf(this);
+		const target = totalPhotos[index]
+		target.favorite = true;
+		console.log("Current target = " + target.favorite)
+		const stringifyPhotos = JSON.stringify(totalPhotos);
+		localStorage.setItem("photos", stringifyPhotos)
 	}
 }
