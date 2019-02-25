@@ -18,7 +18,7 @@ class Photo {
 	updatePhoto() {
 		const index = totalPhotos.indexOf(this);
 		const target = totalPhotos[index]
-		target.favorite = true;
+		target.favorite = !target.favorite;
 		const stringifyPhotos = JSON.stringify(totalPhotos);
 		localStorage.setItem("photos", stringifyPhotos)
 	}

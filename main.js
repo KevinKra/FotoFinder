@@ -36,10 +36,8 @@ function removeCard(e) {
 function likeCard(e) {
 	if (e.target.className !== "card-favorite") return;
 	let photoFavorite = findCard(e);
-	console.log(photoFavorite.favorite);
-	// photoFavorite.favorite = true;
-	console.log(photoFavorite.favorite);
 	photoFavorite.updatePhoto();
+	updateCounter();
 }
 
 function findCard(e) {
@@ -47,6 +45,24 @@ function findCard(e) {
 	return totalPhotos.find( (photo) => {
 		return photo.id === cardID;
 	})
+}
+
+
+function updateCounter() {
+	//check the .favorite property of every card and update the counter
+	//target the appropriate element in html
+	//cycle through localStorage and update button with total of true conditions
+	let parsedPhotos = JSON.parse(localStorage.getItem("photos"));
+	let favorites = 0;
+	parsedPhotos.forEach( function(photo) {
+		if (photo.favorite) {
+			favorites++;
+		}
+	})
+	if (favorites !== 0) {
+		viewFavorites.innerText = `View ${favorites} Favorites`;
+	}
+	console.log(favorites)
 }
 
 function restoreObjectMethods(parsedCards) {
