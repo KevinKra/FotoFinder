@@ -13,44 +13,50 @@ const fileInput = document.querySelector(`[name=file]`);
 const cardOutputArea = document.querySelector(`.main-content`);
 
 //card
-const totalPhotos = JSON.parse(localStorage.getItem('photos')) || [];
-let reader = new FileReader();
+const trashBtn = document.querySelector(".card-trash");
+const favoriteBtn = document.querySelector(".card-favorite");
+
+let totalPhotos = JSON.parse(localStorage.getItem('photos')) || [];
+const reader = new FileReader();
 
 
+restoreObjectMethods(totalPhotos);
 
-persistDOM();
 
+cardOutputArea.addEventListener("click", removeCard);
 addToAlbum.addEventListener("click", loadImage);
 
+function removeCard(e) {
+	if (e.target.className !== 'card-trash') return;
+	let photoRemove = findCard(e);
+	e.target.closest(".card").remove();
+	photoRemove.deleteFromStorage();
+}
+
+function findCard(e) {
+	let cardID = Number(e.target.closest(".card").getAttribute("data-id"));
+	return totalPhotos.find( (photo) => {
+		return photo.id === cardID;
+	})
+}
+
+function restoreObjectMethods(parsedCards) {
+	totalPhotos = [];
+	parsedCards.forEach( function(photo) {
+		let rePhoto = new Photo(photo.title, photo.caption, photo.file, photo.id);
+		totalPhotos.push(rePhoto);
+		appendCard(rePhoto);
+	})
+}
 
 function loadImage() {
-	console.log('test');
 	if (fileInput.files[0]) {
 		reader.readAsDataURL(fileInput.files[0]);
 		reader.onload = collectUserInputs;
 	}
 }
 
-function persistDOM() {
-	restoreObjectMethods();
-	restoredPhotos.forEach( function(photo) {
-		photo.appendCard();
-	})
-}
-
-function restoreObjectMethods() {
-	restoredPhotos = [];
-	totalPhotos.forEach( function(photo) {
-		photo = new Photo(photo.title, photo.caption, photo.file, photo.id);
-		restoredPhotos.push(photo);
-	})
-	return restoredPhotos;
-}
-
-
 function collectUserInputs(e) {
-	console.log('test2');
-//flag if ternary true, run function.
 	let validFlag = false;
 	e.preventDefault();
 	checkInputs();
@@ -63,9 +69,23 @@ function collectUserInputs(e) {
 
 	totalPhotos.push(newPhoto);
 	newPhoto.saveToStorage(totalPhotos);
-	newPhoto.appendCard();
 
 	function checkInputs() {
 		return (!titleInput.value || !captionInput.value || !fileInput.value)? alert('Please enter all fields') : validFlag = true;
 	};
+}
+
+function appendCard(card) {
+cardOutputArea.innerHTML += `
+		<article class="card" data-id="${card.id}">
+		<section>
+			<h2 class="card-title">${card.title}</h2>
+			<img src=${card.file} alt="" class="card-image">
+			<p class="card-paragraph">${card.caption}</p>
+		</section>
+		<footer class="card-footer">
+			<button class="btn-trash"><img class="card-trash" src="icons/delete.svg"></button>
+			<button class="btn-like"><img class="card-favorite" src="icons/favorite.svg"></button>
+		</footer>
+	</article>`
 }
