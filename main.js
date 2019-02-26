@@ -38,14 +38,13 @@ function removeCard(e) {
 
 //BUG DOM not updating card svg according to status of object
 function likeCard(e) {
-	// e.preventDefault();
-	if (e.target.className !== "card-favorite") return;
-	const photoFavorite = findCard(e);
-	// e.target.src = "icons/favorite-active.svg"
-	photoFavorite.updatePhoto();
-	// photoFavorite.trackActive();
-	// liveUpdateCard();
-	updateCounter();
+ if(e.target.className !== "card-favorite") return;
+ const photoFavorite = findCard(e);
+ photoFavorite.updatePhoto();
+ let imgSrc = photoFavorite.favorite ? "icons/favorite-active.svg" : "icons/favorite.svg"
+ $(e.target.closest('.btn-like'))
+   .html(`<img class="card-favorite" src=${imgSrc}>`)
+ updateCounter();
 }
 
 function findCard(e) {
