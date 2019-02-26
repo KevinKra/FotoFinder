@@ -17,44 +17,79 @@ const trashBtn = document.querySelector(".card-trash");
 const favoriteBtn = document.querySelector(".card-favorite");
 
 let totalPhotos = JSON.parse(localStorage.getItem('photos')) || [];
+// console.log(totalPhotos);
 const reader = new FileReader();
 
 
 restoreObjectMethods(totalPhotos);
+updateCounter();
 
-cardOutputArea.addEventListener("click", likeCard)
+cardOutputArea.addEventListener("click", likeCard);
 cardOutputArea.addEventListener("click", removeCard);
 addToAlbum.addEventListener("click", loadImage);
 
+
 function removeCard(e) {
 	if (e.target.className !== 'card-trash') return;
-	let photoRemove = findCard(e);
+	const photoRemove = findCard(e);
 	e.target.closest(".card").remove();
 	photoRemove.deleteFromStorage();
 }
 
+//BUG DOM not updating card svg according to status of object
 function likeCard(e) {
-	if (e.target.className !== "card-favorite") return;
-	let photoFavorite = findCard(e);
-	console.log(photoFavorite.favorite);
-	// photoFavorite.favorite = true;
-	console.log(photoFavorite.favorite);
-	photoFavorite.updatePhoto();
+ if(e.target.className !== "card-favorite") return;
+ const photoFavorite = findCard(e);
+ photoFavorite.updatePhoto();
+ let imgSrc = photoFavorite.favorite ? "icons/favorite-active.svg" : "icons/favorite.svg"
+ $(e.target.closest('.btn-like'))
+   .html(`<img class="card-favorite" src=${imgSrc}>`)
+ updateCounter();
 }
 
 function findCard(e) {
-	let cardID = Number(e.target.closest(".card").getAttribute("data-id"));
+	const cardID = Number(e.target.closest(".card").getAttribute("data-id"));
 	return totalPhotos.find( (photo) => {
 		return photo.id === cardID;
-	})
+	});
 }
 
+function liveUpdateCard(e) {
+	const targetCard = findCard(e);
+	console.log("target: " + targetCard);
+}
+
+//BUG: on reload, if 1 card is clicked, all other card statuses change to false
+//could be event delegation/bubbling issue
+
+//its not that it onloads
+//preventDefault on all related did nothing
+function updateCounter() {
+	const parsedPhotos = JSON.parse(localStorage.getItem("photos")) || [];
+	let favorites = 0;
+	parsedPhotos.forEach( function(photo) {
+		if (photo.favorite) {
+			favorites++;
+		}
+	})
+	if (favorites !== 0) {
+		viewFavorites.innerText = `View ${favorites} Favorites`;
+	} else {
+		viewFavorites.innerText = `View 0 Favorites`;
+	}
+	console.log(favorites)
+}
+
+// THESE CARDS ARE ONLY BEING APPENDED WITH DEFAULT FALSE FAVORITE PROP
+// not reloading DOM with correctly modified stat
 function restoreObjectMethods(parsedCards) {
 	totalPhotos = [];
 	parsedCards.forEach( function(photo) {
-		let rePhoto = new Photo(photo.title, photo.caption, photo.file, photo.id);
-		totalPhotos.push(rePhoto);
-		appendCard(rePhoto);
+		let restoredPhoto = new Photo(photo.title, photo.caption, photo.file, photo.id, photo.favorite, photo.image);
+		console.log(restoredPhoto);
+		totalPhotos.push(restoredPhoto);
+		restoredPhoto.trackActive();
+		appendCard(restoredPhoto);
 	})
 }
 
@@ -94,7 +129,7 @@ cardOutputArea.innerHTML += `
 		</section>
 		<footer class="card-footer">
 			<button class="btn-trash"><img class="card-trash" src="icons/delete.svg"></button>
-			<button class="btn-like"><img class="card-favorite" src="icons/favorite.svg"></button>
+			<button class="btn-like"><img class="card-favorite" src=${card.image}></button>
 		</footer>
 	</article>`
 }

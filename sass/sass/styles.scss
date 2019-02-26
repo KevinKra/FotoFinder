@@ -87,7 +87,7 @@ body {
 .main-header {
 	background-color: $primaryColor;
 	padding-bottom: 1rem;
-	height: 60%;
+	height: 450px;
 	.top-nav {
 		align-items: center;
 		display: flex;
@@ -99,7 +99,8 @@ body {
 			h1 {
 				color: #fff;
 				font-size: 36px;
-				letter-spacing: 3px;
+				font-weight: 800;
+				letter-spacing: 2px;
 				margin: 0;
 			}
 			img {
@@ -217,6 +218,40 @@ body {
 	}
 }
 
+@media screen and (max-width: 700px) {
+
+	.main-header {
+		height: 490px;
+	}
+
+	.header-search {
+		margin-top: .9rem;
+	}
+
+	.top-nav {
+		@include flex-column;
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.main-header {
+		.top-nav {
+			.header-search {
+				width: 80%;
+				input {
+					width: 80%;
+				}
+				button {
+					width: 20%;
+				}
+			}
+		}
+		.input-form {
+			min-width: 40%;
+			width: 90%;
+		}
+	}
+}
 
 
 
