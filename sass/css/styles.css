@@ -41,7 +41,7 @@ body {
 .main-header {
   background-color: #3E2A35;
   padding-bottom: 1rem;
-  height: 60%;
+  height: 450px;
 }
 .main-header .top-nav {
   align-items: center;
@@ -56,7 +56,8 @@ body {
 .main-header .top-nav .header-title h1 {
   color: #fff;
   font-size: 36px;
-  letter-spacing: 3px;
+  font-weight: 800;
+  letter-spacing: 2px;
   margin: 0;
 }
 .main-header .top-nav .header-title img {
@@ -182,6 +183,21 @@ body {
   border: none;
   cursor: pointer;
   outline: none;
+}
+
+@media screen and (max-width: 700px) {
+  .main-header {
+    height: 490px;
+  }
+
+  .header-search {
+    margin-top: .9rem;
+  }
+
+  .top-nav {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
