@@ -17,6 +17,7 @@ const trashBtn = document.querySelector(".card-trash");
 const favoriteBtn = document.querySelector(".card-favorite");
 
 let totalPhotos = JSON.parse(localStorage.getItem('photos')) || [];
+// console.log(totalPhotos);
 const reader = new FileReader();
 
 
@@ -25,8 +26,8 @@ updateCounter();
 
 cardOutputArea.addEventListener("click", likeCard);
 cardOutputArea.addEventListener("click", removeCard);
-cardOutputArea.addEventListener("click", clickHandler);
 addToAlbum.addEventListener("click", loadImage);
+
 
 function removeCard(e) {
 	if (e.target.className !== 'card-trash') return;
@@ -35,10 +36,13 @@ function removeCard(e) {
 	photoRemove.deleteFromStorage();
 }
 
+//BUG DOM not updating card svg according to status of object
 function likeCard(e) {
 	if (e.target.className !== "card-favorite") return;
 	const photoFavorite = findCard(e);
+	// e.target.src = "icons/favorite-active.svg"
 	photoFavorite.updatePhoto();
+	photoFavorite.trackActive();
 	updateCounter();
 }
 
@@ -48,10 +52,6 @@ function findCard(e) {
 		return photo.id === cardID;
 	})
 }
-
-
-console.log("favorite button: " + favoriteBtn);
-
 
 //BUG: on reload, if 1 card is clicked, all other card statuses change to false
 //could be event delegation/bubbling issue
@@ -64,7 +64,6 @@ function updateCounter() {
 	parsedPhotos.forEach( function(photo) {
 		if (photo.favorite) {
 			favorites++;
-			// favoriteBtn.src = "icons/favorite-active.svg"
 		}
 	})
 	if (favorites !== 0) {
@@ -75,32 +74,16 @@ function updateCounter() {
 	console.log(favorites)
 }
 
-
-//probably delete
-function persistFavorite() {
-	const parsedPhotos = JSON.parse(localStorage.getItem("photos")) || [];
-	parsedPhotos.forEach( photo => {
-		if (photo.favorite) {
-			favoriteBtn.src = "icons/favorite-active.svg"
-		}
-	})
-}
-
-function clickHandler(e) {
-	// console.log("current event: " + e.target.className)
-	if (e.target.className == "card-favorite") {
-		console.log('matches card-favorite')
-	} 
-}
-
-
-
+// THESE CARDS ARE ONLY BEING APPENDED WITH DEFAULT FALSE FAVORITE PROP
+// not reloading DOM with correctly modified stat
 function restoreObjectMethods(parsedCards) {
 	totalPhotos = [];
 	parsedCards.forEach( function(photo) {
-		let rePhoto = new Photo(photo.title, photo.caption, photo.file, photo.id);
-		totalPhotos.push(rePhoto);
-		appendCard(rePhoto);
+		let restoredPhoto = new Photo(photo.title, photo.caption, photo.file, photo.id, photo.favorite);
+		console.log(restoredPhoto);
+		totalPhotos.push(restoredPhoto);
+		restoredPhoto.trackActive();
+		appendCard(restoredPhoto);
 	})
 }
 
@@ -140,7 +123,7 @@ cardOutputArea.innerHTML += `
 		</section>
 		<footer class="card-footer">
 			<button class="btn-trash"><img class="card-trash" src="icons/delete.svg"></button>
-			<button class="btn-like"><img class="card-favorite" src="icons/favorite.svg"></button>
+			<button class="btn-like"><img class="card-favorite" src=${card.image}></button>
 		</footer>
 	</article>`
 }

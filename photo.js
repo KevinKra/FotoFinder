@@ -1,10 +1,11 @@
 class Photo {
-	constructor(title, caption, file, id) {
+	constructor(title, caption, file, id, favorite) {
 		this.title = title;
 		this.caption = caption;
 		this.file = file;
-		this.favorite = false;
+		this.favorite = favorite || false;
 		this.id = id;
+		this.image = "icons/favorite.svg"
 	}
 	saveToStorage(photos) {
 		localStorage.setItem("photos", JSON.stringify(photos));
@@ -21,5 +22,12 @@ class Photo {
 		target.favorite = !target.favorite;
 		const stringifyPhotos = JSON.stringify(totalPhotos);
 		localStorage.setItem("photos", stringifyPhotos)
+	}
+	trackActive() {
+		if (this.favorite) {
+			this.image = "icons/favorite-active.svg";
+		} else if (!this.favorite) {
+			this.image = "icons/favorite.svg";
+		}
 	}
 }
