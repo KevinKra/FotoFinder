@@ -38,11 +38,13 @@ function removeCard(e) {
 
 //BUG DOM not updating card svg according to status of object
 function likeCard(e) {
+	// e.preventDefault();
 	if (e.target.className !== "card-favorite") return;
 	const photoFavorite = findCard(e);
 	// e.target.src = "icons/favorite-active.svg"
 	photoFavorite.updatePhoto();
-	photoFavorite.trackActive();
+	// photoFavorite.trackActive();
+	// liveUpdateCard();
 	updateCounter();
 }
 
@@ -50,7 +52,12 @@ function findCard(e) {
 	const cardID = Number(e.target.closest(".card").getAttribute("data-id"));
 	return totalPhotos.find( (photo) => {
 		return photo.id === cardID;
-	})
+	});
+}
+
+function liveUpdateCard(e) {
+	const targetCard = findCard(e);
+	console.log("target: " + targetCard);
 }
 
 //BUG: on reload, if 1 card is clicked, all other card statuses change to false
@@ -79,7 +86,7 @@ function updateCounter() {
 function restoreObjectMethods(parsedCards) {
 	totalPhotos = [];
 	parsedCards.forEach( function(photo) {
-		let restoredPhoto = new Photo(photo.title, photo.caption, photo.file, photo.id, photo.favorite);
+		let restoredPhoto = new Photo(photo.title, photo.caption, photo.file, photo.id, photo.favorite, photo.image);
 		console.log(restoredPhoto);
 		totalPhotos.push(restoredPhoto);
 		restoredPhoto.trackActive();
