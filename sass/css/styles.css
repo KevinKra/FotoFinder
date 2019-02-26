@@ -199,5 +199,20 @@ body {
     flex-direction: column;
   }
 }
+@media screen and (max-width: 425px) {
+  .main-header .top-nav .header-search {
+    width: 80%;
+  }
+  .main-header .top-nav .header-search input {
+    width: 80%;
+  }
+  .main-header .top-nav .header-search button {
+    width: 20%;
+  }
+  .main-header .input-form {
+    min-width: 40%;
+    width: 90%;
+  }
+}
 
 /*# sourceMappingURL=styles.css.map */

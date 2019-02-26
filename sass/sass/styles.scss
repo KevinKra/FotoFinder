@@ -231,7 +231,26 @@ body {
 	.top-nav {
 		@include flex-column;
 	}
+}
 
+@media screen and (max-width: 425px) {
+	.main-header {
+		.top-nav {
+			.header-search {
+				width: 80%;
+				input {
+					width: 80%;
+				}
+				button {
+					width: 20%;
+				}
+			}
+		}
+		.input-form {
+			min-width: 40%;
+			width: 90%;
+		}
+	}
 }
 
 
