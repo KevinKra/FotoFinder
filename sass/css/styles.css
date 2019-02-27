@@ -28,6 +28,13 @@ body {
 .btn.btn-sm {
   width: 40%;
 }
+.btn:disabled {
+  background-color: #C2B2B4;
+}
+.btn:disabled:hover {
+  color: #eee;
+  cursor: default;
+}
 .btn:hover {
   background-color: #C2B2B4;
   color: #222;

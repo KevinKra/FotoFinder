@@ -8,7 +8,8 @@ const form = document.querySelector('.input-form');
 const titleInput = document.querySelector(`[name=title-input]`);
 const captionInput = document.querySelector(`[name=caption-input]`);
 const fileInput = document.querySelector(`[name=file]`);
-
+const inputs = document.querySelectorAll(`.input`);
+console.log(inputs);
 //sections
 const cardOutputArea = document.querySelector(`.main-content`);
 
@@ -29,11 +30,27 @@ cardOutputArea.addEventListener("click", likeCard);
 cardOutputArea.addEventListener("click", removeCard);
 cardOutputArea.addEventListener("focusout", editExistingCard)
 addToAlbum.addEventListener("click", loadImage);
+form.addEventListener("input", checkEach)
 
+function checkEach() {
+	let allValid = 0;
+	inputs.forEach( input => {
+		if(input.value.length > 0 || fileInput.files[0] ) {
+			allValid++;
+		}
+	});
 
+	if (allValid >= 3) {
+		activateButton(addToAlbum);
+	}
+	console.log(allValid);
+}
 
-//add event listener to listen for a click in each card
-//if user clicks there let them edit the text of the card
+// activateButton(addToAlbum);
+function activateButton(button) {
+	button.removeAttribute("disabled");
+}
+
 function editExistingCard(e) {
 	let targetIdea = findCard(e);
 	console.log(targetIdea);
@@ -106,18 +123,29 @@ function restoreObjectMethods(parsedCards) {
 	totalPhotos = [];
 	parsedCards.forEach( function(photo) {
 		let restoredPhoto = new Photo(photo.title, photo.caption, photo.file, photo.id, photo.favorite, photo.image);
-		console.log(restoredPhoto);
+		// console.log(restoredPhoto);
 		totalPhotos.push(restoredPhoto);
 		restoredPhoto.trackActive();
 		appendCard(restoredPhoto);
 	})
 }
 
-function loadImage() {
+function loadImage(e) {
 	if (fileInput.files[0]) {
 		reader.readAsDataURL(fileInput.files[0]);
 		reader.onload = collectUserInputs;
+	} else {
+		e.preventDefault();
+		// addToAlbum.style.color = "red";
+		alert("Please enter all inputs.")
 	}
+}
+
+console.log(addToAlbum);
+function removeDisabled(element) {
+	element.disabled = false;
+	console.log(element);
+	element.className = "activeeEE";
 }
 
 function collectUserInputs(e) {
@@ -135,7 +163,7 @@ function collectUserInputs(e) {
 	newPhoto.saveToStorage(totalPhotos);
 
 	function checkInputs() {
-		return (!titleInput.value || !captionInput.value || !fileInput.value)? alert('Please enter all fields') : validFlag = true;
+		return (!titleInput.value || !captionInput.value || !fileInput.value)? null : validFlag = true;
 	};
 }
 
@@ -148,7 +176,7 @@ cardOutputArea.innerHTML += `
 			<p class="card-paragraph" contenteditable="true">${card.caption}</p>
 		</section>
 		<footer class="card-footer">
-			<button class="btn-trash"><img class="card-trash" src="icons/delete.svg"></button>
+			<button onClick="window.location.reload()" class="btn-trash"><img class="card-trash" src="icons/delete.svg"></button>
 			<button class="btn-like"><img class="card-favorite" src=${card.image}></button>
 		</footer>
 	</article>`

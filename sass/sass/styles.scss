@@ -58,6 +58,13 @@ $btnActive: #eee;
 	&.btn-sm {
 		width: 40%;
 	}
+	&:disabled {
+		background-color: $secondaryColor;
+		&:hover {
+			color: #eee;
+			cursor: default;
+		}
+	}
 	&:hover {
 		background-color: $btnHover; 
 		color: $btnColor2;
@@ -80,6 +87,14 @@ body {
 	padding: 0;
 }
 
+// #add-to-album {
+// 	background-color: $secondaryColor;
+// }
+
+// #add-to-album:hover {
+// 	color: #eee;
+// 	cursor: default;
+// }
 
 .main-content {@include font-size(1)};
 .btn {@include default-btn};
