@@ -166,11 +166,11 @@ body {
 			}
 		}
 		.inputfile {
-			width: 0.1px;
 			height: 0.1px;
 			opacity: 0;
 			overflow: hidden;
 			position: absolute;
+			width: 0.1px;
 			z-index: -1;
 		}
 		.btn-input-container {
@@ -189,14 +189,14 @@ body {
 	background-color: $secondaryColor;
 	flex-wrap: wrap;
 	justify-content: center;
-	padding: 0 3rem;
 	min-height: 50vh;
+	padding: 0 3rem;
 	.card {
 		@include flex-column;
 		border: 2px solid #938284;
+		height: 100%;
 		margin: 1rem;
 		width: 200px;
-		height: 100%;
 		section {
 			@include flex-column;
 			.card-title {
@@ -237,6 +237,26 @@ body {
 
 	.main-header {
 		height: 490px;
+			.top-nav {
+				margin: 0 auto;
+				min-width: 400px;
+				padding: 0;
+				width: 50%;
+				.header-title {
+					h1 {
+						font-size: 48px;
+					}
+				}
+			.header-search {
+				width: 100%;
+				input {
+					width: 85%;
+				}
+				button {
+					width: 15%;
+				}
+			}
+		}		
 	}
 
 	.header-search {
@@ -246,18 +266,23 @@ body {
 	.top-nav {
 		@include flex-column;
 	}
+
+	.btn.btn-sm {
+		width: 48%;
+	}
+
 }
 
 @media screen and (max-width: 425px) {
 	.main-header {
 		.top-nav {
-			.header-search {
-				width: 80%;
-				input {
-					width: 80%;
-				}
-				button {
-					width: 20%;
+			min-width: 200px;
+			margin: 0 auto;
+			padding: 0;
+			width: 90%;
+			.header-title {
+				h1 {
+					font-size: 32px;
 				}
 			}
 		}
