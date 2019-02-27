@@ -9,6 +9,7 @@ const titleInput = document.querySelector(`[name=title-input]`);
 const captionInput = document.querySelector(`[name=caption-input]`);
 const fileInput = document.querySelector(`[name=file]`);
 const inputs = document.querySelectorAll(`.input`);
+const searchBar = document.querySelector(`#search-bar`);
 console.log(inputs);
 //sections
 const cardOutputArea = document.querySelector(`.main-content`);
@@ -26,6 +27,7 @@ const reader = new FileReader();
 restoreObjectMethods(totalPhotos);
 updateCounter();
 
+searchBar.addEventListener("keyup", searchCards)
 cardOutputArea.addEventListener("click", likeCard);
 cardOutputArea.addEventListener("click", removeCard);
 cardOutputArea.addEventListener("focusout", editExistingCard)
@@ -46,7 +48,25 @@ function checkEach() {
 	console.log(allValid);
 }
 
-// activateButton(addToAlbum);
+
+function searchCards(e){
+  const searchBarText = e.target.value;
+  const regex = new RegExp(searchBarText, "i");
+  clearCards();
+  for (let i = 0; i < totalPhotos.length; i++) {
+    if(regex.test(totalPhotos[i].title) || regex.test(totalPhotos[i].body)) {
+      appendCard(totalPhotos[i]);
+    }
+  }
+};
+
+function clearCards() {
+	const cardsToRemove = cardOutputArea.querySelectorAll('.card');
+	cardsToRemove.forEach( function(card) {
+		card.remove();
+	}) 
+}
+
 function activateButton(button) {
 	button.removeAttribute("disabled");
 }
@@ -63,7 +83,6 @@ function editExistingCard(e) {
 		targetIdea.caption = newValue;
 	}
 	targetIdea.saveToStorage(totalPhotos);	
-	// targetIdea.updatePhoto();
 }
 
 function removeCard(e) {
@@ -73,7 +92,6 @@ function removeCard(e) {
 	photoRemove.deleteFromStorage();
 }
 
-//BUG DOM not updating card svg according to status of object
 function likeCard(e) {
  if(e.target.className !== "card-favorite") return;
  const photoFavorite = findCard(e);
@@ -96,11 +114,6 @@ function liveUpdateCard(e) {
 	console.log("target: " + targetCard);
 }
 
-//BUG: on reload, if 1 card is clicked, all other card statuses change to false
-//could be event delegation/bubbling issue
-
-//its not that it onloads
-//preventDefault on all related did nothing
 function updateCounter() {
 	const parsedPhotos = JSON.parse(localStorage.getItem("photos")) || [];
 	let favorites = 0;
@@ -114,11 +127,8 @@ function updateCounter() {
 	} else {
 		viewFavorites.innerText = `View 0 Favorites`;
 	}
-	// console.log(favorites)
 }
 
-// THESE CARDS ARE ONLY BEING APPENDED WITH DEFAULT FALSE FAVORITE PROP
-// not reloading DOM with correctly modified stat
 function restoreObjectMethods(parsedCards) {
 	totalPhotos = [];
 	parsedCards.forEach( function(photo) {
@@ -136,16 +146,8 @@ function loadImage(e) {
 		reader.onload = collectUserInputs;
 	} else {
 		e.preventDefault();
-		// addToAlbum.style.color = "red";
 		alert("Please enter all inputs.")
 	}
-}
-
-console.log(addToAlbum);
-function removeDisabled(element) {
-	element.disabled = false;
-	console.log(element);
-	element.className = "activeeEE";
 }
 
 function collectUserInputs(e) {
