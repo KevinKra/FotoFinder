@@ -9,7 +9,7 @@ const titleInput = document.querySelector(`[name=title-input]`);
 const captionInput = document.querySelector(`[name=caption-input]`);
 const fileInput = document.querySelector(`[name=file]`);
 const inputs = document.querySelectorAll(`.input`);
-const searchBar = document.querySelector(`#search-bar`);
+const searchBar = document.querySelector(`#search-bar`); 
 console.log(inputs);
 //sections
 const cardOutputArea = document.querySelector(`.main-content`);
@@ -27,12 +27,24 @@ const reader = new FileReader();
 restoreObjectMethods(totalPhotos);
 updateCounter();
 
+form.addEventListener("input", checkEach)
+viewFavorites.addEventListener('click', searchForFavorites);
+addToAlbum.addEventListener("click", loadImage);
 searchBar.addEventListener("keyup", searchCards)
 cardOutputArea.addEventListener("click", likeCard);
 cardOutputArea.addEventListener("click", removeCard);
 cardOutputArea.addEventListener("focusout", editExistingCard)
-addToAlbum.addEventListener("click", loadImage);
-form.addEventListener("input", checkEach)
+
+
+function searchForFavorites(e) {
+	e.preventDefault();
+	clearCards();
+	let favoritePhotos = []; 
+	favoritePhotos = totalPhotos.forEach( photo => {
+		 return photo.favorite? appendCard(photo) : null;
+	})
+}
+
 
 function checkEach() {
 	let allValid = 0;
@@ -41,11 +53,9 @@ function checkEach() {
 			allValid++;
 		}
 	});
-
 	if (allValid >= 3) {
 		activateButton(addToAlbum);
 	}
-	console.log(allValid);
 }
 
 
@@ -107,11 +117,6 @@ function findCard(e) {
 	return totalPhotos.find( (photo) => {
 		return photo.id === cardID;
 	});
-}
-
-function liveUpdateCard(e) {
-	const targetCard = findCard(e);
-	console.log("target: " + targetCard);
 }
 
 function updateCounter() {
