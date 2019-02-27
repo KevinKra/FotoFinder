@@ -17,6 +17,7 @@ const trashBtn = document.querySelector(".card-trash");
 const favoriteBtn = document.querySelector(".card-favorite");
 
 let totalPhotos = JSON.parse(localStorage.getItem('photos')) || [];
+console.log(totalPhotos)
 // console.log(totalPhotos);
 const reader = new FileReader();
 
@@ -26,8 +27,27 @@ updateCounter();
 
 cardOutputArea.addEventListener("click", likeCard);
 cardOutputArea.addEventListener("click", removeCard);
+cardOutputArea.addEventListener("focusout", editExistingCard)
 addToAlbum.addEventListener("click", loadImage);
 
+
+
+//add event listener to listen for a click in each card
+//if user clicks there let them edit the text of the card
+function editExistingCard(e) {
+	let targetIdea = findCard(e);
+	console.log(targetIdea);
+	const newValue = e.target.innerHTML;
+	console.log(newValue);
+	if (e.target.className  === "card-title") {
+		targetIdea.title = newValue;
+	}
+	if (e.target.className  === "card-paragraph") {
+		targetIdea.caption = newValue;
+	}
+	targetIdea.saveToStorage(totalPhotos);	
+	// targetIdea.updatePhoto();
+}
 
 function removeCard(e) {
 	if (e.target.className !== 'card-trash') return;
@@ -77,7 +97,7 @@ function updateCounter() {
 	} else {
 		viewFavorites.innerText = `View 0 Favorites`;
 	}
-	console.log(favorites)
+	// console.log(favorites)
 }
 
 // THESE CARDS ARE ONLY BEING APPENDED WITH DEFAULT FALSE FAVORITE PROP
@@ -123,9 +143,9 @@ function appendCard(card) {
 cardOutputArea.innerHTML += `
 		<article class="card" data-id="${card.id}">
 		<section>
-			<h2 class="card-title">${card.title}</h2>
+			<h2 class="card-title" contenteditable="true">${card.title}</h2>
 			<img src=${card.file} alt="" class="card-image">
-			<p class="card-paragraph">${card.caption}</p>
+			<p class="card-paragraph" contenteditable="true">${card.caption}</p>
 		</section>
 		<footer class="card-footer">
 			<button class="btn-trash"><img class="card-trash" src="icons/delete.svg"></button>
