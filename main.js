@@ -22,10 +22,6 @@ const reader = new FileReader();
 
 let totalPhotos = JSON.parse(localStorage.getItem('photos')) || [];
 
-
-restoreObjectMethods(totalPhotos);
-updateCounter();
-
 //Event Listeners
 form.addEventListener("input", checkEach)
 viewFavorites.addEventListener('click', searchForFavorites);
@@ -35,17 +31,16 @@ cardOutputArea.addEventListener("click", likeCard);
 cardOutputArea.addEventListener("click", removeCard);
 cardOutputArea.addEventListener("focusout", editExistingCard)
 
+//functionality
+restoreObjectMethods(totalPhotos);
+updateCounter();
 
 function checkEach() {
 	let allValid = 0;
 	inputs.forEach( input => {
-		if(input.value.length > 0) {
-			allValid++;
-		}
+		if(input.value.length > 0) { allValid++; }
 	});
-	if (allValid >= 3) {
-		activateButton(addToAlbum);
-	}
+	if (allValid >= 3) { activateButton(addToAlbum); }
 }
 
 function activateButton(button) {
@@ -56,12 +51,10 @@ function searchCards(e){
   const searchBarText = e.target.value;
   const regex = new RegExp(searchBarText, "i");
   clearCards();
-  for (let i = 0; i < totalPhotos.length; i++) {
-    if(regex.test(totalPhotos[i].title) || regex.test(totalPhotos[i].body)) {
-      appendCard(totalPhotos[i]);
-    }
-  }
-};
+  totalPhotos.forEach( photo => {
+   (regex.test(photo.title) || regex.test(photo.body))? appendCard(photo) : null;
+  })
+}
 
 function searchForFavorites(e) {
 	e.preventDefault();
@@ -81,12 +74,8 @@ function clearCards() {
 function editExistingCard(e) {
 	const targetIdea = findCard(e);
 	const newValue = e.target.innerHTML;
-	if (e.target.className  === "card-title") {
-		targetIdea.title = newValue;
-	}
-	if (e.target.className  === "card-paragraph") {
-		targetIdea.caption = newValue;
-	}
+	if (e.target.className  === "card-title") { targetIdea.title = newValue; }
+	if (e.target.className  === "card-paragraph") { targetIdea.caption = newValue; }
 	targetIdea.saveToStorage(totalPhotos);	
 }
 
@@ -118,15 +107,9 @@ function updateCounter() {
 	const parsedPhotos = JSON.parse(localStorage.getItem("photos")) || [];
 	let favorites = 0;
 	parsedPhotos.forEach( function(photo) {
-		if (photo.favorite) {
-			favorites++;
-		}
+		if (photo.favorite) { favorites++; }
 	})
-	if (favorites !== 0) {
-		viewFavorites.innerText = `View ${favorites} Favorites`;
-	} else {
-		viewFavorites.innerText = `View 0 Favorites`;
-	}
+  favorites !== 0? viewFavorites.innerText = `View ${favorites} Favorites` : viewFavorites.innerText = `View 0 Favorites`;
 }
 
 function restoreObjectMethods(parsedCards) {
